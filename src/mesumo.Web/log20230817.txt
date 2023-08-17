@@ -1,0 +1,224 @@
+2023-08-17 16:21:06.681 -05:00 [INF] Registered 5 endpoints in 460 milliseconds.
+2023-08-17 16:21:07.006 -05:00 [INF] User profile is available. Using 'C:\Users\clifton.cruz\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-17 16:21:08.922 -05:00 [INF] Executed DbCommand (35ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+PRAGMA journal_mode = 'wal';
+2023-08-17 16:21:09.067 -05:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Contributors" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Contributors" PRIMARY KEY AUTOINCREMENT,
+    "Name" TEXT NOT NULL
+);
+2023-08-17 16:21:09.068 -05:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Projects" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Projects" PRIMARY KEY AUTOINCREMENT,
+    "Name" TEXT NOT NULL,
+    "Priority" INTEGER NOT NULL
+);
+2023-08-17 16:21:09.068 -05:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "ToDoItems" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_ToDoItems" PRIMARY KEY AUTOINCREMENT,
+    "Title" TEXT NOT NULL,
+    "Description" TEXT NOT NULL,
+    "ContributorId" INTEGER NULL,
+    "IsDone" INTEGER NOT NULL,
+    "ProjectId" INTEGER NULL,
+    CONSTRAINT "FK_ToDoItems_Projects_ProjectId" FOREIGN KEY ("ProjectId") REFERENCES "Projects" ("Id")
+);
+2023-08-17 16:21:09.069 -05:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_ToDoItems_ProjectId" ON "ToDoItems" ("ProjectId");
+2023-08-17 16:21:09.322 -05:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "ToDoItems" AS "t")
+2023-08-17 16:21:09.388 -05:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."Name", "p"."Priority"
+FROM "Projects" AS "p"
+2023-08-17 16:21:09.398 -05:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."ContributorId", "t"."Description", "t"."IsDone", "t"."ProjectId", "t"."Title"
+FROM "ToDoItems" AS "t"
+2023-08-17 16:21:09.405 -05:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "c"."Id", "c"."Name"
+FROM "Contributors" AS "c"
+2023-08-17 16:21:09.690 -05:00 [INF] Executed DbCommand (7ms) [Parameters=[@p0='?' (Size = 7)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Contributors" ("Name")
+VALUES (@p0)
+RETURNING "Id";
+2023-08-17 16:21:09.711 -05:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (Size = 8)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Contributors" ("Name")
+VALUES (@p0)
+RETURNING "Id";
+2023-08-17 16:21:09.866 -05:00 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (Size = 12), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Projects" ("Name", "Priority")
+VALUES (@p0, @p1)
+RETURNING "Id";
+2023-08-17 16:21:09.881 -05:00 [INF] Executed DbCommand (0ms) [Parameters=[@p2='?' (DbType = Int32), @p3='?' (Size = 31), @p4='?' (DbType = Boolean), @p5='?' (DbType = Int32), @p6='?' (Size = 18)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "ToDoItems" ("ContributorId", "Description", "IsDone", "ProjectId", "Title")
+VALUES (@p2, @p3, @p4, @p5, @p6)
+RETURNING "Id";
+2023-08-17 16:21:09.882 -05:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (Size = 81), @p2='?' (DbType = Boolean), @p3='?' (DbType = Int32), @p4='?' (Size = 15)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "ToDoItems" ("ContributorId", "Description", "IsDone", "ProjectId", "Title")
+VALUES (@p0, @p1, @p2, @p3, @p4)
+RETURNING "Id";
+2023-08-17 16:21:09.883 -05:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (Size = 59), @p2='?' (DbType = Boolean), @p3='?' (DbType = Int32), @p4='?' (Size = 20)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "ToDoItems" ("ContributorId", "Description", "IsDone", "ProjectId", "Title")
+VALUES (@p0, @p1, @p2, @p3, @p4)
+RETURNING "Id";
+2023-08-17 16:21:10.160 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-17 16:21:10.160 -05:00 [INF] Hosting environment: Development
+2023-08-17 16:21:10.160 -05:00 [INF] Content root path: C:\Proyectos\FundacionSocial\MESUMO\Arq-Test\mesumo\src\mesumo.Web
+2023-08-17 16:21:10.212 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/ - -
+2023-08-17 16:21:10.415 -05:00 [WRN] Failed to determine the https port for redirect.
+2023-08-17 16:21:10.458 -05:00 [INF] Executing endpoint 'mesumo.Web.Controllers.HomeController.Index (mesumo.Web)'
+2023-08-17 16:21:10.474 -05:00 [INF] Route matched with {action = "Index", controller = "Home", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller mesumo.Web.Controllers.HomeController (mesumo.Web).
+2023-08-17 16:21:10.490 -05:00 [INF] Executing ViewResult, running view Index.
+2023-08-17 16:21:10.926 -05:00 [INF] Executed ViewResult - view Index executed in 440.6798ms.
+2023-08-17 16:21:10.931 -05:00 [INF] Executed action mesumo.Web.Controllers.HomeController.Index (mesumo.Web) in 455.5634ms
+2023-08-17 16:21:10.932 -05:00 [INF] Executed endpoint 'mesumo.Web.Controllers.HomeController.Index (mesumo.Web)'
+2023-08-17 16:21:11.008 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/jquery/dist/jquery.min.js - -
+2023-08-17 16:21:11.008 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - -
+2023-08-17 16:21:11.017 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/css/site.css?v=AKvNjO3dCPPS0eSU1Ez8T2wI280i08yGycV9ndytL-c - -
+2023-08-17 16:21:11.017 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/css/bootstrap.min.css - -
+2023-08-17 16:21:11.054 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js - -
+2023-08-17 16:21:11.064 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/mesumo.Web.styles.css?v=XJU4OrhWguPwcX0sCxHCcJHVE9Jv_GPhQYuHB8UYXpw - -
+2023-08-17 16:21:11.113 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/ - - - 200 - text/html;+charset=utf-8 906.5909ms
+2023-08-17 16:21:11.123 -05:00 [INF] Sending file. Request path: '/css/site.css'. Physical path: 'C:\Proyectos\FundacionSocial\MESUMO\Arq-Test\mesumo\src\mesumo.Web\wwwroot\css\site.css'
+2023-08-17 16:21:11.123 -05:00 [INF] Sending file. Request path: '/mesumo.Web.styles.css'. Physical path: 'C:\Proyectos\FundacionSocial\MESUMO\Arq-Test\mesumo\src\mesumo.Web\obj\Debug\net7.0\scopedcss\bundle\mesumo.Web.styles.css'
+2023-08-17 16:21:11.124 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/css/site.css?v=AKvNjO3dCPPS0eSU1Ez8T2wI280i08yGycV9ndytL-c - - - 200 194 text/css 106.8982ms
+2023-08-17 16:21:11.124 -05:00 [INF] Sending file. Request path: '/js/site.js'. Physical path: 'C:\Proyectos\FundacionSocial\MESUMO\Arq-Test\mesumo\src\mesumo.Web\wwwroot\js\site.js'
+2023-08-17 16:21:11.124 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/mesumo.Web.styles.css?v=XJU4OrhWguPwcX0sCxHCcJHVE9Jv_GPhQYuHB8UYXpw - - - 200 1127 text/css 61.7961ms
+2023-08-17 16:21:11.125 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - - - 200 230 text/javascript 116.6811ms
+2023-08-17 16:21:11.127 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_vs/browserLink - -
+2023-08-17 16:21:11.127 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - -
+2023-08-17 16:21:11.132 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - - - 200 12352 application/javascript;+charset=utf-8 4.7066ms
+2023-08-17 16:21:11.146 -05:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/css/bootstrap.min.css'. Physical path: 'C:\Proyectos\FundacionSocial\MESUMO\Arq-Test\mesumo\src\mesumo.Web\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css'
+2023-08-17 16:21:11.150 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/css/bootstrap.min.css - - - 200 162726 text/css 132.8550ms
+2023-08-17 16:21:11.175 -05:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.bundle.min.js'. Physical path: 'C:\Proyectos\FundacionSocial\MESUMO\Arq-Test\mesumo\src\mesumo.Web\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js'
+2023-08-17 16:21:11.189 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 54.9120ms
+2023-08-17 16:21:11.190 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js - - - 200 78474 text/javascript 136.1338ms
+2023-08-17 16:21:11.216 -05:00 [INF] Sending file. Request path: '/lib/jquery/dist/jquery.min.js'. Physical path: 'C:\Proyectos\FundacionSocial\MESUMO\Arq-Test\mesumo\src\mesumo.Web\wwwroot\lib\jquery\dist\jquery.min.js'
+2023-08-17 16:21:11.220 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/jquery/dist/jquery.min.js - - - 200 89478 text/javascript 211.9808ms
+2023-08-17 16:21:11.313 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/favicon.ico - -
+2023-08-17 16:21:11.323 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map - -
+2023-08-17 16:21:11.345 -05:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Proyectos\FundacionSocial\MESUMO\Arq-Test\mesumo\src\mesumo.Web\wwwroot\favicon.ico'
+2023-08-17 16:21:11.345 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/favicon.ico - - - 200 5430 image/x-icon 31.9740ms
+2023-08-17 16:21:11.373 -05:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\Proyectos\FundacionSocial\MESUMO\Arq-Test\mesumo\src\mesumo.Web\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map'
+2023-08-17 16:21:11.384 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map - - - 200 327261 text/plain 61.5501ms
+2023-08-17 16:51:14.922 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/swagger - -
+2023-08-17 16:51:14.929 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/swagger - - - 301 - - 7.2304ms
+2023-08-17 16:51:14.942 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/swagger/index.html - -
+2023-08-17 16:51:15.079 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/swagger/index.html - - - 200 - text/html;charset=utf-8 137.5325ms
+2023-08-17 16:51:15.243 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/swagger/swagger-ui.css - -
+2023-08-17 16:51:15.243 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/swagger/swagger-ui-bundle.js - -
+2023-08-17 16:51:15.245 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/swagger/swagger-ui-standalone-preset.js - -
+2023-08-17 16:51:15.249 -05:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-08-17 16:51:15.253 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/swagger/swagger-ui.css - - - 200 144929 text/css 10.2023ms
+2023-08-17 16:51:15.258 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - -
+2023-08-17 16:51:15.259 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - - - 200 12352 application/javascript;+charset=utf-8 1.0393ms
+2023-08-17 16:51:15.260 -05:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2023-08-17 16:51:15.262 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_vs/browserLink - -
+2023-08-17 16:51:15.264 -05:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2023-08-17 16:51:15.265 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/swagger/swagger-ui-standalone-preset.js - - - 200 312163 text/javascript 19.3899ms
+2023-08-17 16:51:15.275 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 13.1452ms
+2023-08-17 16:51:15.281 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/swagger/swagger-ui-bundle.js - - - 200 1061536 text/javascript 37.6245ms
+2023-08-17 16:51:15.431 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/swagger/v1/swagger.json - -
+2023-08-17 16:51:15.452 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/swagger/favicon-32x32.png - -
+2023-08-17 16:51:15.454 -05:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2023-08-17 16:51:15.454 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/swagger/favicon-32x32.png - - - 200 628 image/png 2.1463ms
+2023-08-17 16:51:15.594 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 163.1456ms
+2023-08-17 16:51:21.232 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/ProjectDetails/1 - -
+2023-08-17 16:51:21.234 -05:00 [INF] Executing endpoint '/ProjectDetails/Index'
+2023-08-17 16:51:21.258 -05:00 [INF] Route matched with {page = "/ProjectDetails/Index", action = "", controller = ""}. Executing page /ProjectDetails/Index
+2023-08-17 16:51:21.287 -05:00 [INF] Executing handler method mesumo.Web.Pages.ProjectDetails.IndexModel.OnGetAsync - ModelState is "Valid"
+2023-08-17 16:51:21.495 -05:00 [INF] Executed DbCommand (4ms) [Parameters=[@__projectId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Name", "t"."Priority", "t0"."Id", "t0"."ContributorId", "t0"."Description", "t0"."IsDone", "t0"."ProjectId", "t0"."Title"
+FROM (
+    SELECT "p"."Id", "p"."Name", "p"."Priority"
+    FROM "Projects" AS "p"
+    WHERE "p"."Id" = @__projectId_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "ToDoItems" AS "t0" ON "t"."Id" = "t0"."ProjectId"
+ORDER BY "t"."Id"
+2023-08-17 16:51:21.509 -05:00 [INF] Executed handler method OnGetAsync, returned result .
+2023-08-17 16:51:21.510 -05:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2023-08-17 16:51:21.511 -05:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2023-08-17 16:51:21.526 -05:00 [INF] Executed page /ProjectDetails/Index in 267.8977ms
+2023-08-17 16:51:21.526 -05:00 [INF] Executed endpoint '/ProjectDetails/Index'
+2023-08-17 16:51:21.530 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/css/bootstrap.min.css - -
+2023-08-17 16:51:21.530 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/mesumo.Web.styles.css?v=XJU4OrhWguPwcX0sCxHCcJHVE9Jv_GPhQYuHB8UYXpw - -
+2023-08-17 16:51:21.530 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/css/site.css?v=AKvNjO3dCPPS0eSU1Ez8T2wI280i08yGycV9ndytL-c - -
+2023-08-17 16:51:21.531 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/ProjectDetails/1 - - - 200 - text/html;+charset=utf-8 298.5424ms
+2023-08-17 16:51:21.533 -05:00 [INF] The file /mesumo.Web.styles.css was not modified
+2023-08-17 16:51:21.533 -05:00 [INF] The file /lib/bootstrap/dist/css/bootstrap.min.css was not modified
+2023-08-17 16:51:21.533 -05:00 [INF] The file /css/site.css was not modified
+2023-08-17 16:51:21.533 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/mesumo.Web.styles.css?v=XJU4OrhWguPwcX0sCxHCcJHVE9Jv_GPhQYuHB8UYXpw - - - 304 - text/css 3.0701ms
+2023-08-17 16:51:21.533 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/css/bootstrap.min.css - - - 304 - text/css 3.3211ms
+2023-08-17 16:51:21.533 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/css/site.css?v=AKvNjO3dCPPS0eSU1Ez8T2wI280i08yGycV9ndytL-c - - - 304 - text/css 2.9777ms
+2023-08-17 16:51:21.538 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/jquery/dist/jquery.min.js - -
+2023-08-17 16:51:21.539 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js - -
+2023-08-17 16:51:21.539 -05:00 [INF] The file /lib/bootstrap/dist/js/bootstrap.bundle.min.js was not modified
+2023-08-17 16:51:21.539 -05:00 [INF] The file /lib/jquery/dist/jquery.min.js was not modified
+2023-08-17 16:51:21.539 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/jquery/dist/jquery.min.js - - - 304 - text/javascript 0.9546ms
+2023-08-17 16:51:21.539 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js - - - 304 - text/javascript 0.6331ms
+2023-08-17 16:51:21.543 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - -
+2023-08-17 16:51:21.544 -05:00 [INF] The file /js/site.js was not modified
+2023-08-17 16:51:21.544 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - - - 304 - text/javascript 1.2963ms
+2023-08-17 16:51:21.548 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - -
+2023-08-17 16:51:21.549 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - - - 200 12352 application/javascript;+charset=utf-8 0.7407ms
+2023-08-17 16:51:21.550 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_vs/browserLink - -
+2023-08-17 16:51:21.565 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 14.5976ms
+2023-08-17 16:51:21.572 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map - -
+2023-08-17 16:51:21.626 -05:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\Proyectos\FundacionSocial\MESUMO\Arq-Test\mesumo\src\mesumo.Web\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map'
+2023-08-17 16:51:21.631 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map - - - 200 327261 text/plain 59.4731ms
+2023-08-17 16:51:22.255 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/ProjectDetails/Incomplete - -
+2023-08-17 16:51:22.258 -05:00 [INF] Executing endpoint '/ProjectDetails/Incomplete'
+2023-08-17 16:51:22.268 -05:00 [INF] Route matched with {page = "/ProjectDetails/Incomplete", action = "", controller = ""}. Executing page /ProjectDetails/Incomplete
+2023-08-17 16:51:22.271 -05:00 [INF] Executing handler method mesumo.Web.Pages.ProjectDetails.IncompleteModel.OnGetAsync - ModelState is "Valid"
+2023-08-17 16:51:22.277 -05:00 [INF] Executed DbCommand (0ms) [Parameters=[@__projectId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Name", "t"."Priority", "t0"."Id", "t0"."ContributorId", "t0"."Description", "t0"."IsDone", "t0"."ProjectId", "t0"."Title"
+FROM (
+    SELECT "p"."Id", "p"."Name", "p"."Priority"
+    FROM "Projects" AS "p"
+    WHERE "p"."Id" = @__projectId_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "ToDoItems" AS "t0" ON "t"."Id" = "t0"."ProjectId"
+ORDER BY "t"."Id"
+2023-08-17 16:51:22.278 -05:00 [INF] Executed handler method OnGetAsync, returned result .
+2023-08-17 16:51:22.278 -05:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2023-08-17 16:51:22.278 -05:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2023-08-17 16:51:22.294 -05:00 [INF] Executed page /ProjectDetails/Incomplete in 25.8546ms
+2023-08-17 16:51:22.294 -05:00 [INF] Executed endpoint '/ProjectDetails/Incomplete'
+2023-08-17 16:51:22.296 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/ProjectDetails/Incomplete - - - 200 - text/html;+charset=utf-8 41.2576ms
+2023-08-17 16:51:22.531 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - -
+2023-08-17 16:51:22.532 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - - - 200 12352 application/javascript;+charset=utf-8 0.8067ms
+2023-08-17 16:51:22.534 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_vs/browserLink - -
+2023-08-17 16:51:22.541 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 7.1269ms
+2023-08-17 16:51:24.840 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/Project/1 - -
+2023-08-17 16:51:24.842 -05:00 [INF] Executing endpoint 'mesumo.Web.Controllers.ProjectController.Index (mesumo.Web)'
+2023-08-17 16:51:24.852 -05:00 [INF] Route matched with {action = "Index", controller = "Project", page = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(Int32) on controller mesumo.Web.Controllers.ProjectController (mesumo.Web).
+2023-08-17 16:51:24.857 -05:00 [INF] Executed DbCommand (0ms) [Parameters=[@__projectId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Name", "t"."Priority", "t0"."Id", "t0"."ContributorId", "t0"."Description", "t0"."IsDone", "t0"."ProjectId", "t0"."Title"
+FROM (
+    SELECT "p"."Id", "p"."Name", "p"."Priority"
+    FROM "Projects" AS "p"
+    WHERE "p"."Id" = @__projectId_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "ToDoItems" AS "t0" ON "t"."Id" = "t0"."ProjectId"
+ORDER BY "t"."Id"
+2023-08-17 16:51:24.860 -05:00 [INF] Executing ViewResult, running view Index.
+2023-08-17 16:51:24.870 -05:00 [INF] Executed ViewResult - view Index executed in 10.3223ms.
+2023-08-17 16:51:24.870 -05:00 [INF] Executed action mesumo.Web.Controllers.ProjectController.Index (mesumo.Web) in 18.08ms
+2023-08-17 16:51:24.870 -05:00 [INF] Executed endpoint 'mesumo.Web.Controllers.ProjectController.Index (mesumo.Web)'
+2023-08-17 16:51:24.871 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/Project/1 - - - 200 - text/html;+charset=utf-8 31.0236ms
+2023-08-17 16:51:25.107 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - -
+2023-08-17 16:51:25.108 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - - - 200 12352 application/javascript;+charset=utf-8 0.6785ms
+2023-08-17 16:51:25.112 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_vs/browserLink - -
+2023-08-17 16:51:25.124 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 11.4891ms
+2023-08-17 16:51:43.148 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/info - -
+2023-08-17 16:51:43.149 -05:00 [INF] Executing endpoint 'mesumo.Web.Api.MetaController.Info (mesumo.Web)'
+2023-08-17 16:51:43.154 -05:00 [INF] Route matched with {action = "Info", controller = "Meta", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.String] Info() on controller mesumo.Web.Api.MetaController (mesumo.Web).
+2023-08-17 16:51:43.195 -05:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2023-08-17 16:51:43.197 -05:00 [INF] Executed action mesumo.Web.Api.MetaController.Info (mesumo.Web) in 42.8277ms
+2023-08-17 16:51:43.197 -05:00 [INF] Executed endpoint 'mesumo.Web.Api.MetaController.Info (mesumo.Web)'
+2023-08-17 16:51:43.197 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/info - - - 200 - text/plain;+charset=utf-8 48.9798ms
